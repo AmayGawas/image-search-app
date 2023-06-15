@@ -12,7 +12,13 @@ let inputData="";
 let page=1;
 
 async function  searhimages(){
-    inputData=input.value;
+    inputData=input.value.trim();
+
+    if (inputData === "") {
+        console.log("Input is empty");
+        return;
+      }
+
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accesskey}`;
 
     const response =await fetch(url);
@@ -44,16 +50,36 @@ async function  searhimages(){
     if(page>1){
         showmore.style.display="block";
     }
+
 }
 
-formE1.addEventListener("submit",(event)=>{
-event.preventDefault();
-page=1;
-searhimages();
-})
+if(inputData==null){
+    console.log("null");
 
-showmore.addEventListener("click",()=>{
+}else{
+    console.log(inputData)
+}
 
-    searhimages();
-  
-    })
+
+
+
+    formE1.addEventListener("submit",(event)=>{
+      
+
+            event.preventDefault();
+
+            page=1;
+            searhimages();
+            showmore.addEventListener("click",()=>{
+        
+                searhimages();
+              
+                })
+            
+        }
+       
+    )
+      
+
+
+
